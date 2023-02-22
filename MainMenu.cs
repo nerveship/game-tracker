@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 internal class Menu
 {
-        internal void MainMenu()
+    internal static void MainMenu()
         {
             Console.Clear();
             bool closeApp = false;

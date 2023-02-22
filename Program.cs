@@ -24,4 +24,4 @@ using (var connection = new SqliteConnection(connectionString))
 
 Menu menu = new Menu();
 
-menu.MainMenu();
+Menu.MainMenu();
