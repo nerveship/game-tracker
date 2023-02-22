@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "game-tracker": {
+      "commandName": "Project",
+      "workingDirectory": "F:\\Creative Projects\\programming\\C#\\game-tracker"
+    }
+  }
+}
