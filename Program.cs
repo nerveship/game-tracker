@@ -29,10 +29,10 @@ namespace GameTracker
                 tableCmd.ExecuteNonQuery();
             }
 
-            GetUserInput();
+            MainMenu();
         }
 
-        static void GetUserInput()
+        static void MainMenu()
         {
             Console.Clear();
             bool closeApp = false;
