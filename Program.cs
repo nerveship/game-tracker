@@ -56,6 +56,26 @@ namespace GameTracker
                         Console.WriteLine("Goodbye!");
                         closeApp = true;
                         break;
+
+                    case "1":
+                        Console.WriteLine("View record screen");
+                        //ViewRecords();
+                        break;
+
+                    case "2":
+                        Console.WriteLine("Insert record screen");
+                        //InsertRecord();
+                        break;
+
+                    case "3":
+                        Console.WriteLine("Delete record screen");
+                        //DeleteRecord();
+                        break;
+
+                    case "4":
+                        Console.WriteLine("Update record screen");
+                        //UpdateRecord();
+                        break;
                 }
             }
         }
