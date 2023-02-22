@@ -10,6 +10,7 @@ internal class Menu
         {
             Console.Clear();
             bool closeApp = false;
+            DatabaseActions databaseActions = new DatabaseActions();
 
             while (closeApp == false)
             {
@@ -32,23 +33,19 @@ internal class Menu
                         break;
 
                     case "1":
-                        Console.WriteLine("View record screen");
-                        //ViewRecords();
+                        databaseActions.ViewRecords();
                         break;
 
                     case "2":
-                        Console.WriteLine("Insert record screen");
-                        //InsertRecord();
+                        databaseActions.InsertRecords();
                         break;
 
                     case "3":
-                        Console.WriteLine("Delete record screen");
-                        //DeleteRecord();
+                        databaseActions.DeleteRecords();
                         break;
 
                     case "4":
-                        Console.WriteLine("Update record screen");
-                        //UpdateRecord();
+                        databaseActions.UpdateRecords();
                         break;
                 }
             }
