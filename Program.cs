@@ -1,21 +1,15 @@
 ﻿using System;
 using Microsoft.Data.Sqlite;
 
-namespace GameTracker
+string connectionString = @"Data Source=GameTracker.db";
+using (var connection = new SqliteConnection(connectionString))
 {
-    class Program
-    {
-        static void Main()
-        {
-            string connectionString = @"Data Source=GameTracker.db";
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
+    connection.Open();
 
-                var tableCmd = connection.CreateCommand();
+    var tableCmd = connection.CreateCommand();
 
-                tableCmd.CommandText =
-                    @"CREATE TABLE IF NOT EXISTS games (
+    tableCmd.CommandText =
+        @"CREATE TABLE IF NOT EXISTS games (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         Title TEXT,
                         Genre TEXT,
@@ -25,12 +19,9 @@ namespace GameTracker
                         Rating INTEGER,
                         MaxRating INTEGER
                         )";
-                tableCmd.ExecuteNonQuery();
-            }
-
-            Menu menu = new Menu();
-
-            menu.MainMenu();
-        }
-    }
+    tableCmd.ExecuteNonQuery();
 }
+
+Menu menu = new Menu();
+
+menu.MainMenu();
