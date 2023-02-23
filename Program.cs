@@ -1,27 +1,36 @@
 ﻿using System;
 using Microsoft.Data.Sqlite;
 
-string connectionString = @"Data Source=GameTracker.db";
-using (var connection = new SqliteConnection(connectionString))
+class Program
 {
-    connection.Open();
+    internal static string connectionString = @"Data Source=GameTracker.db";
 
-    var tableCmd = connection.CreateCommand();
+    Menu menu = new Menu();
 
-    tableCmd.CommandText =
-        @"CREATE TABLE IF NOT EXISTS games (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        Title TEXT,
-                        Genre TEXT,
-                        DateBeat TEXT,
-                        Hours INTEGER,
-                        Minutes INTEGER,
-                        Rating INTEGER,
-                        MaxRating INTEGER
-                        )";
-    tableCmd.ExecuteNonQuery();
+    static void Main()
+    {
+        using (var connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+
+            var tableCmd = connection.CreateCommand();
+
+            tableCmd.CommandText =
+                @"CREATE TABLE IF NOT EXISTS games (
+                                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                Title TEXT,
+                                Genre TEXT,
+                                DateBeat TEXT,
+                                Hours INTEGER,
+                                Minutes INTEGER,
+                                Rating INTEGER,
+                                MaxRating INTEGER
+                                )";
+            tableCmd.ExecuteNonQuery();
+
+            Menu.MainMenu();
+        }
+    }
 }
 
-Menu menu = new Menu();
 
-Menu.MainMenu();

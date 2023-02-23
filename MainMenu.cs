@@ -33,7 +33,7 @@ internal class Menu
                         break;
 
                     case "1":
-                        databaseActions.ViewRecords();
+                        databaseActions.ViewRecords(Program.connectionString);
                         break;
 
                     case "2":

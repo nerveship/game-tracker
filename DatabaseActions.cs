@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,22 @@ using System.Threading.Tasks;
 
 internal class DatabaseActions
 {
-    internal void ViewRecords()
+    Program program = new Program();
+    internal void ViewRecords(string connectionString)
     {
-        Console.WriteLine("View records page");
+        Console.Clear();
+        using (var connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+
+            var ViewAll = connection.CreateCommand();
+
+            ViewAll.CommandText =
+                @"SELECT * FROM games";
+
+            ViewAll.ExecuteNonQuery();
+        }
+        
     }
 
     internal void InsertRecords()
