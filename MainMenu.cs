@@ -14,6 +14,7 @@ internal class Menu
 
             while (closeApp == false)
             {
+                Console.Clear();
                 Console.WriteLine("----------------------------------");
                 Console.WriteLine("MAIN MENU");
                 Console.WriteLine("What would you like to do?");
