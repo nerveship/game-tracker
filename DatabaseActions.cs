@@ -1,9 +1,11 @@
 ﻿using game_tracker;
 using Microsoft.Data.Sqlite;
+using System.Globalization;
 
 internal class DatabaseActions
 {
     Program program = new Program();
+
     internal void ViewRecords(string connectionString)
     {
         Console.Clear();
@@ -14,11 +16,48 @@ internal class DatabaseActions
             var ViewAll = connection.CreateCommand();
 
             ViewAll.CommandText =
-                @"SELECT * FROM games";
+                $"SELECT * FROM games ";
 
-            ViewAll.ExecuteNonQuery();
+            List<games> tableData = new();
+
+            SqliteDataReader reader = ViewAll.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tableData.Add(
+                        new games
+                        {
+                            Id = reader.GetInt32(0),
+                            Title = reader.GetString(1),
+                            Genre = reader.GetString(2),
+                            DateBeat = reader.GetString(3),
+                            Hours = reader.GetInt32(4),
+                            Minutes = reader.GetInt32(5),
+                            Rating = reader.GetInt32(6),
+                        });
+                }
+            }
+            else
+            {
+                Console.WriteLine("No rows found");
+            }
+
+            connection.Close();
+
+            foreach (var ent in tableData)
+            {
+                Console.WriteLine($"ID: {ent.Id}\n" +
+                    $"Title: {ent.Title}\n" +
+                    $"Genre: {ent.Genre}\n" +
+                    $"Date beat: {ent.DateBeat}\n" +
+                    $"Hours: {ent.Hours}\n" +
+                    $"Minutes: {ent.Minutes}\n" +
+                    $"Rating: {ent.Rating}\n");
+            }
+            Console.ReadKey();
         }
-        
     }
 
     internal void InsertRecords(string connectionString)
@@ -41,12 +80,14 @@ internal class DatabaseActions
         using (var connection = new SqliteConnection(connectionString))
         {
             connection.Open();
-
             var InsertRecord = connection.CreateCommand();
 
             InsertRecord.CommandText =
-                $@"INSERT INTO games (Title, Genre, DateBeat, Hours, Minutes, Rating)
-                VALUES (value1, value2, value3, ...)";
+                "INSERT INTO games(Title, Genre, DateBeat, Hours, Minutes, Rating)" +
+                $"VALUES('{Title}', '{Genre}', '{DateBeat}', {Hours}, {Minutes}, {Rating})";
+
+            InsertRecord.ExecuteNonQuery();
+            connection.Close();
         }
 
     }
@@ -60,5 +101,15 @@ internal class DatabaseActions
     {
         Console.WriteLine("Update records page");
     }
+}
 
+internal class games
+{
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Genre { get; set; }
+    public string DateBeat { get; set; }
+    public int Hours { get; set; }
+    public int Minutes { get; set; }
+    public int Rating { get; set; }
 }

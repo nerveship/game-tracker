@@ -26,9 +26,9 @@ class Program
                                 Rating INTEGER)";
 
             tableCmd.ExecuteNonQuery();
-
-            Menu.MainMenu();
+            connection.Close();
         }
+        Menu.MainMenu();
     }
 }
 
