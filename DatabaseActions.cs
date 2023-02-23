@@ -25,15 +25,10 @@ internal class DatabaseActions
         
     }
 
-    internal void InsertRecords()
+    internal void InsertRecords(string connectionString)
     {
         Console.Clear();
         Console.WriteLine("Please insert valid input for each type.");
-        GetDataTypes();
-    }
-
-    private static void GetDataTypes()
-    {
         Console.Write("Title: ");
         string Title = Console.ReadLine();
 
@@ -43,6 +38,25 @@ internal class DatabaseActions
         Console.Write("Date Beat: ");
         string DateBeat = Console.ReadLine();
 
+        int Hours = GetHours();
+        int Minutes = GetMinutes();
+        int Rating = GetRating();
+
+        using (var connection = new SqliteConnection(connectionString))
+        {
+            connection.Open();
+
+            var InsertRecord = connection.CreateCommand();
+
+            InsertRecord.CommandText =
+                $@"INSERT INTO games (Title, Genre, DateBeat, Hours, Minutes, Rating)
+                VALUES (value1, value2, value3, ...)";
+        }
+
+    }
+
+    internal static int GetHours()
+    {
         Console.Write("Hours: ");
         string StringHours = Console.ReadLine();
         int Hours;
@@ -51,8 +65,11 @@ internal class DatabaseActions
             Console.WriteLine("Please input numbers");
             StringHours = Console.ReadLine();
         }
+        return Hours;
+    }
 
-
+    internal static int GetMinutes()
+    {
         Console.Write("Minutes: ");
         string StringMinute = Console.ReadLine();
         int minutes;
@@ -69,7 +86,11 @@ internal class DatabaseActions
             Console.Write("Minutes: ");
             minutes = Convert.ToInt32(Console.ReadLine());
         }
-
+        return minutes;
+    }
+        
+    internal static int GetRating()
+    {
         Console.Write("Rating: ");
         string StringRating = Console.ReadLine();
         int rating;
@@ -86,6 +107,7 @@ internal class DatabaseActions
             Console.Write("Rating: ");
             rating = Convert.ToInt32(Console.ReadLine());
         }
+        return rating;
     }
 
     internal void DeleteRecords()

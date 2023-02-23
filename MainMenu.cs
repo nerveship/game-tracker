@@ -38,7 +38,7 @@ internal class Menu
                         break;
 
                     case "2":
-                        databaseActions.InsertRecords();
+                        databaseActions.InsertRecords(Program.connectionString);
                         break;
 
                     case "3":

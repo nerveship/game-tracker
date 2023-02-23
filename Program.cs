@@ -23,9 +23,8 @@ class Program
                                 DateBeat TEXT,
                                 Hours INTEGER,
                                 Minutes INTEGER,
-                                Rating INTEGER,
-                                MaxRating INTEGER
-                                )";
+                                Rating INTEGER)";
+
             tableCmd.ExecuteNonQuery();
 
             Menu.MainMenu();
