@@ -29,8 +29,12 @@ internal class DatabaseActions
     {
         Console.Clear();
         Console.WriteLine("Please insert valid input for each type.");
+        GetDataTypes();
+    }
 
-        Console.Write("Title: "); 
+    private static void GetDataTypes()
+    {
+        Console.Write("Title: ");
         string Title = Console.ReadLine();
 
         Console.Write("Genre: ");
@@ -40,10 +44,25 @@ internal class DatabaseActions
         string DateBeat = Console.ReadLine();
 
         Console.Write("Hours: ");
-        int Hours = Convert.ToInt32(Console.ReadLine());
+        string StringHours = Console.ReadLine();
+        int Hours;
+        while (!int.TryParse(StringHours, out Hours))
+        {
+            Console.WriteLine("Please input numbers");
+            StringHours = Console.ReadLine();
+        }
+
 
         Console.Write("Minutes: ");
-        int minutes = Convert.ToInt32(Console.ReadLine());
+        string StringMinute = Console.ReadLine();
+        int minutes;
+
+        while (!int.TryParse(StringMinute, out minutes))
+        {
+            Console.WriteLine("Please input numbers");
+            StringMinute = Console.ReadLine();
+        }
+
         while (minutes > 59 || minutes < 1)
         {
             Console.WriteLine("Please input an no. of minutes between 1 and 59");
@@ -52,7 +71,15 @@ internal class DatabaseActions
         }
 
         Console.Write("Rating: ");
-        int rating = Convert.ToInt32(Console.ReadLine());
+        string StringRating = Console.ReadLine();
+        int rating;
+
+        while (!int.TryParse(StringRating, out rating))
+        {
+            Console.WriteLine("Please input numbers");
+            StringRating = Console.ReadLine();
+        }
+
         while (rating > 5 || rating < 1)
         {
             Console.WriteLine("Please input a rating between 1 and 5");
