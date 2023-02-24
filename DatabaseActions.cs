@@ -1,6 +1,5 @@
 ﻿using game_tracker;
 using Microsoft.Data.Sqlite;
-using System.Globalization;
 
 internal class DatabaseActions
 {
