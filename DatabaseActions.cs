@@ -56,6 +56,7 @@ internal class DatabaseActions
                     $"Minutes: {ent.Minutes}\n" +
                     $"Rating: {ent.Rating}\n");
             }
+            Console.WriteLine("Press enter to continue or return to the main menu");
             Console.ReadKey();
         }
     }
@@ -94,7 +95,24 @@ internal class DatabaseActions
 
     internal void DeleteRecords()
     {
-        Console.WriteLine("Delete records page");
+        Console.Clear();
+        ViewRecords(Program.connectionString);
+        var recordID = Helpers.GetNumberInput("Enter a number for which record you wish to delete");
+        
+        using (var connection = new SqliteConnection(Program.connectionString))
+        {
+            connection.Open();
+            var tableCmd = connection.CreateCommand();
+            tableCmd.CommandText = $"DELETE from games WHERE id = '{recordID}'";
+
+            int rowCount = tableCmd.ExecuteNonQuery();
+
+            if (rowCount == 0)
+            {
+                Console.WriteLine($"Record with the Id {recordID} does not exist.");
+                DeleteRecords();
+            }
+        }
     }
 
     internal void UpdateRecords()

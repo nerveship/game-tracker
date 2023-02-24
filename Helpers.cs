@@ -56,5 +56,19 @@
             }
             return rating;
         }
+
+        internal static int GetNumberInput(string Prompt)
+        {
+            Console.WriteLine(Prompt);
+            string Input = Console.ReadLine();
+            int ConvertedInput;
+
+            while (!int.TryParse(Input, out ConvertedInput))
+            {
+                Console.WriteLine("Please input numbers");
+                ConvertedInput = Convert.ToInt32(Input);
+            }
+            return ConvertedInput;
+        }
     }
 }
