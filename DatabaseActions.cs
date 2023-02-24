@@ -132,6 +132,35 @@ internal class DatabaseActions
 
         int IdChoice = Helpers.GetNumberInput("Which record would you like to update?");
 
+        Console.WriteLine("Write the updated values accordingly");
+
+        Console.Write("Title: ");
+        string Title = Console.ReadLine();
+
+        if (Title == "0")
+        {
+            Menu.MainMenu();
+        }
+
+        Console.Write("Genre: ");
+        string Genre = Console.ReadLine();
+
+        Console.Write("Date Beat: ");
+        string DateBeat = Console.ReadLine();
+
+        int Hours = Helpers.GetHours();
+        int Minutes = Helpers.GetMinutes();
+        int Rating = Helpers.GetRating();
+
+        using (var connection = new SqliteConnection(Program.connectionString))
+        {
+            connection.Open();
+            var tableCmd = connection.CreateCommand();
+            tableCmd.CommandText = $"UPDATE games SET Title = '{Title}', Genre = '{Genre}', DateBeat = '{DateBeat}', Hours = {Hours}, Minutes = {Minutes}, Rating = {Rating} WHERE Id = {IdChoice}";
+
+            tableCmd.ExecuteNonQuery();
+            connection.Close();
+        }
     }
 }
 
