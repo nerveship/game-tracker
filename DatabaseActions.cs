@@ -43,6 +43,8 @@ internal class DatabaseActions
             else
             {
                 Console.WriteLine("No rows found");
+                Console.ReadKey();
+                Menu.MainMenu();
             }
 
             connection.Close();
