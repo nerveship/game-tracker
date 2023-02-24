@@ -5,6 +5,7 @@ using System.Globalization;
 internal class DatabaseActions
 {
     Program program = new Program();
+    Menu menu = new Menu();
 
     internal void ViewRecords(string connectionString)
     {
@@ -56,7 +57,6 @@ internal class DatabaseActions
                     $"Minutes: {ent.Minutes}\n" +
                     $"Rating: {ent.Rating}\n");
             }
-            Console.WriteLine("Press enter to continue or return to the main menu");
             Console.ReadKey();
         }
     }
@@ -64,9 +64,14 @@ internal class DatabaseActions
     internal void InsertRecords(string connectionString)
     {
         Console.Clear();
-        Console.WriteLine("Please insert valid input for each type.");
+        Console.WriteLine("Please insert valid input for each type, or enter 0 to return to the main menu.");
         Console.Write("Title: ");
         string Title = Console.ReadLine();
+
+        if (Title == "0")
+        {
+            Menu.MainMenu();
+        }
 
         Console.Write("Genre: ");
         string Genre = Console.ReadLine();
@@ -97,7 +102,12 @@ internal class DatabaseActions
     {
         Console.Clear();
         ViewRecords(Program.connectionString);
-        var recordID = Helpers.GetNumberInput("Enter a number for which record you wish to delete");
+        var recordID = Helpers.GetNumberInput("Enter a number for which record you wish to delete, or enter 0 to go back to the main menu");
+
+        if (recordID == 0)
+        {
+            Menu.MainMenu();
+        }
         
         using (var connection = new SqliteConnection(Program.connectionString))
         {
@@ -117,7 +127,11 @@ internal class DatabaseActions
 
     internal void UpdateRecords()
     {
-        Console.WriteLine("Update records page");
+        Console.Clear();
+        ViewRecords(Program.connectionString);
+
+        int IdChoice = Helpers.GetNumberInput("Which record would you like to update?");
+
     }
 }
 

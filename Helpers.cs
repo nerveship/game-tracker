@@ -66,7 +66,7 @@
             while (!int.TryParse(Input, out ConvertedInput))
             {
                 Console.WriteLine("Please input numbers");
-                ConvertedInput = Convert.ToInt32(Input);
+                Input = Console.ReadLine();
             }
             return ConvertedInput;
         }
